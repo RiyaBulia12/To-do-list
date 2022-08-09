@@ -1,62 +1,48 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Project Name
-
-> Description the project.
+# To-Do List
+"To-do list" is a tool that helps to organize your day. It simply lists the things that you need to do and allows you to mark them as complete.
 
 
 ## Built With
+- HTML5, CSS3, ES6, Webpack, HtmlWebpackPlugin
 
-- Major languages
-- Frameworks
-- Technologies used
-
-## Live Demo (if available)
-
-[Live Demo Link](https://livedemo.com)
-
-
-## Getting Started
-
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
-
-
+## Project Setup
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
+- You need to have Code Editor Installed
+- Make sure Nodejs and NPM is installed in your system for linters and libraries
+
 ### Setup
+1. Clone the repo in your local machine:
+```bash
+git clone https://github.com/RiyaBulia12/To-do-list.git
+```
+2. Open terminal and cd into project and install the dependencies
+```bash
+cd To-do-list
+npm install
+```
 
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
-
-
+3. run the command to open your index.html automatically in your brower:
+```bash
+npm run build
+npm start
+```
 
 ## Authors
 
-👤 **Author1**
+👤 **Riya Bulia**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
-
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@RiyaBulia12](https://github.com/RiyaBulia12)
+- Twitter: [@Rbulia_original](https://twitter.com/@rbulia_original)
+- LinkedIn: [Riya-Bulia](https://linkedin.com/in/riya-bulia)
 
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
-
-Feel free to check the [issues page](../../issues/).
 
 ## Show your support
 
@@ -64,12 +50,6 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
-
-## 📝 License
-
-This project is [MIT](./LICENSE) licensed.
-
-_NOTE: we recommend using the [MIT license](https://choosealicense.com/licenses/mit/) - you can set it up quickly by [using templates available on GitHub](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository). You can also use [any other license](https://choosealicense.com/licenses/) if you wish._
+- [Setup Project  with Webpack](https://github.com/microverseinc/curriculum-javascript/blob/main/todo-list/exercises/exercise_set_up_project_with_webpack.md)
+- [To-Do List Requirements](https://github.com/microverseinc/curriculum-javascript/blob/main/todo-list/sneak_peek.md)
+- [Template](https://web.archive.org/web/20180320194056/http://www.getminimalist.com:80/)
