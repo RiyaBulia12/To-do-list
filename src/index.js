@@ -1,12 +1,14 @@
-import _ from 'lodash';
-import './style.css';
+import './styles.css';
+import Tasks from './model/task.js';
+import MenuIcon from './icons/menu-vertical.png';
 
-function component() {
-  const element = document.createElement('div');
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
+const clear = document.querySelector('.clear');
 
-  return element;
-}
-
-document.body.appendChild(component());
+Tasks.forEach((task) => {
+  const TASK_LIST = `<li class="task-list" id="${task.index}">
+      <span><button class="checkbox" alt="checkbox" name="checkbox" id="checkbox"></button></span>
+      <span class="task-name">${task.description}</span>
+      <span><img src="${MenuIcon}" alt="Vertical Menu Icon"/></span>
+   </li>`;
+  clear.insertAdjacentHTML('beforebegin', TASK_LIST);
+});
