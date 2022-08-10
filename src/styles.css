@@ -19,7 +19,7 @@ h1 {
 }
 
 .container {
-  width: 400px;
+  width: 30rem;
   background-color: white;
   box-shadow: 0 4px 8px 0 #c9c9c930, 0 6px 20px 0 #c9c9c930;
 }
@@ -41,13 +41,22 @@ img {
   height: 1rem;
 }
 
-.task-text {
-  border: none;
+.italics {
   font-style: italic;
-  font-size: 1rem;
 }
 
-.task-text:focus {
+.add-task {
+  border: none;
+  font-size: 1rem;
+  width: 80%;
+  letter-spacing: 1px;
+}
+
+.task-item {
+  color: black;
+}
+
+.add-task:focus {
   outline: none;
 }
 
@@ -68,4 +77,8 @@ img {
 
 .task-name {
   padding: 0 1rem;
+}
+
+.line-through {
+  text-decoration: line-through;
 }
