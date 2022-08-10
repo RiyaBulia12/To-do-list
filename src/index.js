@@ -15,7 +15,7 @@ const removeTask = (event, index) => {
    taskItem.classList.add('line-through');
    task.updateIndex();
    task.updateStorage(task.taskList);
-   // window.location.reload();
+   window.location.reload();
 }
 
 const changeTask = (taskInput) => {
