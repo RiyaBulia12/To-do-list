@@ -3,18 +3,18 @@ class TASK {
       this.taskList = [];
    }
 
-   fetch() {
+   static fetch() {
       return JSON.parse(localStorage.getItem('task')) || [];
    }
 
-   add(task) {
-      this.taskList = this.fetch();
-      this.taskList.push(task);
-      this.updateStorage(this.taskList);
+   static updateStorage(updatedTask) {
+      localStorage.setItem('task', JSON.stringify(updatedTask));
    }
 
-   updateStorage(updatedTask) {
-      localStorage.setItem('task', JSON.stringify(updatedTask));
+   add(task) {
+      this.taskList = TASK.fetch();
+      this.taskList.push(task);
+      TASK.updateStorage(this.taskList);
    }
 
    updateIndex() {
