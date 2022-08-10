@@ -58,12 +58,12 @@ addTask.addEventListener('keypress', (event) => {
    if (event.key === 'Enter') {
       id = task.taskList.length > 0 ? task.taskList[task.taskList.length - 1].index : 0;
       id = id + 1;
-      const taskItem = { index: id, description: `${addText.value}`, completed: false };
+      const taskItem = { index: id, description: `${addTask.value}`, completed: false };
       task.add(taskItem);
       task.updateIndex();
-      createTaskRow(id, addText.value);
-      addText.value = '';
-      addText.focus();
+      createTaskRow(id, addTask.value);
+      addTask.value = '';
+      addTask.focus();
    }
 });
 
