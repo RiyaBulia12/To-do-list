@@ -82,3 +82,15 @@ img {
 .line-through {
   text-decoration: line-through;
 }
+
+.active {
+  background-color: #fffeca;
+}
+
+.completed {
+  background-image: url("/src/icons/tick.png");
+  width: 20px;
+  background-repeat: no-repeat;
+  height: 20px;
+  border: none;
+}
