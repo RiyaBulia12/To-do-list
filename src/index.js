@@ -1,30 +1,45 @@
 import './styles.css';
 import Tasks from './model/task.js';
 import MenuIcon from './icons/menu-vertical.png';
+import statusUpdate from './statusUpdate.js';
 
 const clear = document.querySelector('.clear');
 const addTask = document.getElementById('add-task');
+
 const task = new Tasks();
 let id = 0;
 
 const removeTask = (event) => {
   const id = event.target.id.split('-');
-  task.taskList = task.taskList.filter((item) => item.index !== parseInt(id[1], 10));
   const taskItem = document.getElementById(`${id[1]}`);
-  taskItem.classList.add('line-through');
-  task.updateIndex();
-  Tasks.updateStorage(task.taskList);
-  window.location.reload();
+  const checkbox = document.getElementById(`checkbox-${id[1]}`);
+  taskItem.classList.toggle('line-through');
+  checkbox.classList.toggle('completed');
 };
 
 const changeTask = (taskInput) => {
   taskInput.addEventListener('change', (event) => {
+    task.taskList = Tasks.fetch();
     task.taskList.forEach((item) => {
       if (item.index === parseInt(event.target.id, 10)) {
         item.description = event.target.value;
       }
+      task.updateIndex();
       Tasks.updateStorage(task.taskList);
     });
+  });
+};
+
+const activeTask = (taskInput) => {
+  taskInput.addEventListener('click', () => {
+    const current = document.getElementsByClassName('active');
+    if (current.length > 0) {
+      current[0].className = current[0].className.replace('active', '');
+      current[0].className = current[0].className.replace('active', '');
+    }
+    taskInput.classList.add('active');
+    const listNode = taskInput.parentNode.parentNode;
+    listNode.classList.add('active');
   });
 };
 
@@ -38,9 +53,11 @@ const createTaskRow = (id, desc) => {
 
   document.querySelectorAll('.checkbox').forEach((elem) => {
     elem.addEventListener('click', removeTask);
+    elem.addEventListener('click', statusUpdate);
   });
   const taskInput = document.getElementById(`${id}`);
   changeTask(taskInput);
+  activeTask(taskInput);
 };
 
 task.taskList = Tasks.fetch();
@@ -61,4 +78,12 @@ addTask.addEventListener('keypress', (event) => {
     addTask.value = '';
     addTask.focus();
   }
+});
+
+clear.addEventListener('click', () => {
+  task.taskList = Tasks.fetch();
+  task.taskList = task.taskList.filter((item) => !item.completed);
+  task.updateIndex();
+  Tasks.updateStorage(task.taskList);
+  window.location.reload();
 });
