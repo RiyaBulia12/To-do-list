@@ -41,6 +41,10 @@ img {
   height: 1rem;
 }
 
+.return:hover {
+  cursor: pointer;
+}
+
 .italics {
   font-style: italic;
 }
@@ -65,6 +69,10 @@ img {
   text-align: center;
   color: gray;
   border-bottom: none;
+}
+
+.clear:hover {
+  cursor: pointer;
 }
 
 .checkbox {
@@ -93,4 +101,30 @@ img {
   background-repeat: no-repeat;
   border: none;
   background-size: 20px 20px;
+}
+
+.menu-dots {
+  cursor: move;
+}
+
+.refresh:hover {
+  animation-name: rotation;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  cursor: pointer;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
