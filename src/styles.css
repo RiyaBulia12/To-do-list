@@ -41,6 +41,10 @@ img {
   height: 1rem;
 }
 
+.return:hover {
+  cursor: pointer;
+}
+
 .italics {
   font-style: italic;
 }
@@ -67,12 +71,17 @@ img {
   border-bottom: none;
 }
 
+.clear:hover {
+  cursor: pointer;
+}
+
 .checkbox {
-  height: 1rem;
-  width: 1rem;
+  height: 18px;
+  width: 18px;
   border: 2px solid #ccc;
   border-radius: 3px;
   background-color: white;
+  padding: 3px;
 }
 
 .task-name {
@@ -88,9 +97,38 @@ img {
 }
 
 .completed {
-  background-image: url("/src/icons/tick.png");
-  width: 20px;
+  background-image: url("/src/icons/done.png");
   background-repeat: no-repeat;
-  height: 20px;
   border: none;
+  background-size: 20px 20px;
+}
+
+.menu-dots {
+  cursor: move;
+}
+
+.refresh:hover {
+  animation-name: rotation;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  cursor: pointer;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.empty-input::-webkit-input-placeholder {
+  color: #f44336ab;
 }
