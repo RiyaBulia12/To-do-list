@@ -25,18 +25,24 @@ if (task.taskList) {
 titleText.value = localStorage.getItem('title') ? JSON.parse(localStorage.getItem('title')) : 'To-Do List';
 
 const addTaskHelperMethod = () => {
-   id = task.taskList.length > 0 ? task.taskList[task.taskList.length - 1].index : 0;
-   id += 1;
-   const taskItem = { index: id, description: `${addTask.value}`, completed: false };
-   task.add(taskItem);
-   task.updateIndex();
-   createTaskRow(id, addTask.value);
-   addTask.value = '';
-   addTask.focus();
+   if (addTask.value !== '') {
+      addTask.placeholder = "Press/click enter to add task";
+      addTask.classList.remove('empty-input');
+      id = task.taskList.length > 0 ? task.taskList[task.taskList.length - 1].index : 0;
+      id += 1;
+      const taskItem = { index: id, description: `${addTask.value}`, completed: false };
+      task.add(taskItem);
+      task.updateIndex();
+      createTaskRow(id, addTask.value);
+      addTask.value = '';
+      addTask.focus();
+   } else {
+      inputValidation();
+   }
 }
 
 addTask.addEventListener('keypress', (event) => {
-   if (event.key === 'Enter' && addTask.value !== '') {
+   if (event.key === 'Enter') {
       addTaskHelperMethod();
    }
 });
@@ -60,13 +66,10 @@ refreshIcon.addEventListener('click', () => {
 });
 
 returnIcon.addEventListener('click', () => {
-   if (addTask.value !== '') {
-      addTaskHelperMethod();
-   } else {
-      inputValidation();
-   }
+   addTaskHelperMethod();
 })
 
-inputValidation() {
-
+function inputValidation() {
+   addTask.placeholder = "Empty Fields not allowed";
+   addTask.classList.add('empty-input');
 }

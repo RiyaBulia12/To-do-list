@@ -128,3 +128,7 @@ img {
     transform: rotate(360deg);
   }
 }
+
+.empty-input::-webkit-input-placeholder {
+  color: #f44336ab;
+}
