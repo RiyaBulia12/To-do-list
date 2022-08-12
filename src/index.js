@@ -1,89 +1,72 @@
 import './styles.css';
 import Tasks from './model/task.js';
-import MenuIcon from './icons/menu-vertical.png';
-import statusUpdate from './statusUpdate.js';
+import { removeTaskUI, createTaskRow } from './crud';
+import { add } from 'lodash';
 
 const clear = document.querySelector('.clear');
 const addTask = document.getElementById('add-task');
-
+const titleText = document.getElementById('title-text');
+const refreshIcon = document.getElementById('refresh');
+const returnIcon = document.getElementById('return');
 const task = new Tasks();
 let id = 0;
 
-const removeTask = (event) => {
-  const id = event.target.id.split('-');
-  const taskItem = document.getElementById(`${id[1]}`);
-  const checkbox = document.getElementById(`checkbox-${id[1]}`);
-  taskItem.classList.toggle('line-through');
-  checkbox.classList.toggle('completed');
-};
-
-const changeTask = (taskInput) => {
-  taskInput.addEventListener('change', (event) => {
-    task.taskList = Tasks.fetch();
-    task.taskList.forEach((item) => {
-      if (item.index === parseInt(event.target.id, 10)) {
-        item.description = event.target.value;
-      }
-      task.updateIndex();
-      Tasks.updateStorage(task.taskList);
-    });
-  });
-};
-
-const activeTask = (taskInput) => {
-  taskInput.addEventListener('click', () => {
-    const current = document.getElementsByClassName('active');
-    if (current.length > 0) {
-      current[0].className = current[0].className.replace('active', '');
-      current[0].className = current[0].className.replace('active', '');
-    }
-    taskInput.classList.add('active');
-    const listNode = taskInput.parentNode.parentNode;
-    listNode.classList.add('active');
-  });
-};
-
-const createTaskRow = (id, desc) => {
-  const TASK_LIST = `<li class="task-list" id="task-list-${id}">
-            <span><button class="checkbox" alt="checkbox" name="checkbox" id="checkbox-${id}"></button></span>
-            <span class="task-name"><input type="text" class="add-task task-item" id="${id}" value="${desc}"></span>
-            <span><img src="${MenuIcon}" alt="Vertical Menu Icon"/></span>
-         </li>`;
-  clear.insertAdjacentHTML('beforebegin', TASK_LIST);
-
-  document.querySelectorAll('.checkbox').forEach((elem) => {
-    elem.addEventListener('click', removeTask);
-    elem.addEventListener('click', statusUpdate);
-  });
-  const taskInput = document.getElementById(`${id}`);
-  changeTask(taskInput);
-  activeTask(taskInput);
-};
-
 task.taskList = Tasks.fetch();
 if (task.taskList) {
-  task.taskList.forEach((task) => {
-    createTaskRow(task.index, task.description);
-  });
+   task.taskList.forEach((task, id) => {
+      createTaskRow(task.index, task.description);
+      // Add line-through for completed task when page is reload
+      if (task.completed) {
+         removeTaskUI(id + 1);
+      }
+   });
+}
+//localstorage for todo title
+titleText.value = localStorage.getItem('title') ? JSON.parse(localStorage.getItem('title')) : 'To-Do List';
+
+const addTaskHelperMethod = () => {
+   id = task.taskList.length > 0 ? task.taskList[task.taskList.length - 1].index : 0;
+   id += 1;
+   const taskItem = { index: id, description: `${addTask.value}`, completed: false };
+   task.add(taskItem);
+   task.updateIndex();
+   createTaskRow(id, addTask.value);
+   addTask.value = '';
+   addTask.focus();
 }
 
 addTask.addEventListener('keypress', (event) => {
-  if (event.key === 'Enter') {
-    id = task.taskList.length > 0 ? task.taskList[task.taskList.length - 1].index : 0;
-    id += 1;
-    const taskItem = { index: id, description: `${addTask.value}`, completed: false };
-    task.add(taskItem);
-    task.updateIndex();
-    createTaskRow(id, addTask.value);
-    addTask.value = '';
-    addTask.focus();
-  }
+   if (event.key === 'Enter' && addTask.value !== '') {
+      addTaskHelperMethod();
+   }
 });
 
 clear.addEventListener('click', () => {
-  task.taskList = Tasks.fetch();
-  task.taskList = task.taskList.filter((item) => !item.completed);
-  task.updateIndex();
-  Tasks.updateStorage(task.taskList);
-  window.location.reload();
+   task.taskList = Tasks.fetch();
+   task.taskList = task.taskList.filter((item) => !item.completed);
+   task.updateIndex();
+   Tasks.updateStorage(task.taskList);
+   window.location.reload();
 });
+
+titleText.addEventListener('keypress', (event) => {
+   if (event.key === 'Enter') {
+      localStorage.setItem('title', JSON.stringify(titleText.value));
+   };
+});
+
+refreshIcon.addEventListener('click', () => {
+   localStorage.setItem('title', JSON.stringify(titleText.value));
+});
+
+returnIcon.addEventListener('click', () => {
+   if (addTask.value !== '') {
+      addTaskHelperMethod();
+   } else {
+      inputValidation();
+   }
+})
+
+inputValidation() {
+
+}
