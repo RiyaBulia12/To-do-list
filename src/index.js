@@ -1,6 +1,6 @@
 import './styles.css';
-import Tasks from './src/model/task.js';
-import { removeTaskUI, createTaskRow } from './src/crud.js';
+import Tasks from './model/task.js';
+import { removeTaskUI, createTaskRow } from './crud.js';
 
 const clear = document.querySelector('.clear');
 const addTask = document.getElementById('add-task');
