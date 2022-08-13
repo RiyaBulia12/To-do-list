@@ -41,10 +41,6 @@ img {
   height: 1rem;
 }
 
-.return:hover {
-  cursor: pointer;
-}
-
 .italics {
   font-style: italic;
 }
@@ -56,23 +52,8 @@ img {
   letter-spacing: 1px;
 }
 
-.task-item {
-  color: black;
-}
-
 .add-task:focus {
   outline: none;
-}
-
-.clear {
-  background-color: #e9e9e996;
-  text-align: center;
-  color: gray;
-  border-bottom: none;
-}
-
-.clear:hover {
-  cursor: pointer;
 }
 
 .checkbox {
@@ -88,8 +69,41 @@ img {
   padding: 0 1rem;
 }
 
+.task-item {
+  color: black;
+}
+
+.clear {
+  background-color: #e9e9e996;
+  text-align: center;
+  color: gray;
+  border-bottom: none;
+}
+
+.clear:hover {
+  cursor: pointer;
+}
+
+/* ---------- Draggable Line Items Begins --------- */
+ul .draggable::after {
+  content: 'draggable';
+  position: absolute;
+  cursor: move;
+  opacity: 0;
+}
+
+/* .draggable-list li .draggable {} */
+
+.over {
+  background-color: #f0f0f0;
+}
+
+/* ---------- Draggable Line Items Ends --------- */
+
+/* ---------- Toggle Classes Begins -------- */
 .line-through {
   text-decoration: line-through;
+  color: #0000006b;
 }
 
 .active {
@@ -101,10 +115,18 @@ img {
   background-repeat: no-repeat;
   border: none;
   background-size: 20px 20px;
+  filter: opacity(0.5);
 }
 
-.menu-dots {
-  cursor: move;
+.empty-input::-webkit-input-placeholder {
+  color: #f44336ab;
+}
+
+/* ---------- Toggle Classes Ends -------- */
+
+/* --------------- Icons Begins ---------------- */
+.return:hover {
+  cursor: pointer;
 }
 
 .refresh:hover {
@@ -129,6 +151,4 @@ img {
   }
 }
 
-.empty-input::-webkit-input-placeholder {
-  color: #f44336ab;
-}
+/* --------------- Icons Ends ---------------- */
