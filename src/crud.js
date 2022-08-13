@@ -21,7 +21,7 @@ const changeTask = (taskInput) => {
   taskInput.addEventListener('change', (event) => {
     task.taskList = Tasks.fetch();
     task.taskList.forEach((item) => {
-      if (item.index === parseInt(event.target.id, 10)) {
+      if (item.index === +event.target.id) {
         item.description = event.target.value;
       }
       task.updateIndex();
