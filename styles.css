@@ -9,9 +9,10 @@ body {
 .parent {
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   height: 100vh;
   margin-top: 3rem;
+  justify-content: space-around;
 }
 
 h1 {
@@ -91,8 +92,6 @@ ul .draggable::after {
   cursor: move;
   opacity: 0;
 }
-
-/* .draggable-list li .draggable {} */
 
 .over {
   background-color: #f0f0f0;
