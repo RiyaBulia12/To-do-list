@@ -1,6 +1,7 @@
 import Tasks from './model/task.js';
 import MenuIcon from './icons/menu-vertical.png';
 import statusUpdate from './statusUpdate.js';
+import dragEventListeners from './draggableEvents.js';
 
 const clear = document.querySelector('.clear');
 const task = new Tasks();
@@ -21,7 +22,7 @@ const changeTask = (taskInput) => {
   taskInput.addEventListener('change', (event) => {
     task.taskList = Tasks.fetch();
     task.taskList.forEach((item) => {
-      if (item.index === parseInt(event.target.id, 10)) {
+      if (item.index === +event.target.id) {
         item.description = event.target.value;
       }
       task.updateIndex();
@@ -44,7 +45,7 @@ const activeTask = (taskInput) => {
 };
 
 export const createTaskRow = (id, desc) => {
-  const TASK_LIST = `<li class="task-list" id="task-list-${id}">
+  const TASK_LIST = `<li class="task-list draggable" id="task-list-${id}"  draggable="true">
             <span><button class="checkbox" alt="checkbox" name="checkbox" id="checkbox-${id}"></button></span>
             <span class="task-name"><input type="text" class="add-task task-item" id="${id}" value="${desc}"></span>
             <span><img src="${MenuIcon}" alt="Vertical Menu Icon" class="menu-dots"/></span>
@@ -58,4 +59,5 @@ export const createTaskRow = (id, desc) => {
   const taskInput = document.getElementById(`${id}`);
   changeTask(taskInput);
   activeTask(taskInput);
+  dragEventListeners();
 };
