@@ -3,6 +3,8 @@
 # To-Do List
 "To-do list" is a tool that helps to organize your day. It simply lists the things that you need to do and allows you to mark them as complete.
 
+# Live Demo
+[Live Demo](https://riyabulia12.github.io/To-do-list/dist/)
 
 ## Built With
 - HTML5, CSS3, ES6, Webpack, HtmlWebpackPlugin
