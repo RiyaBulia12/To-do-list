@@ -85,6 +85,19 @@ img {
   cursor: pointer;
 }
 
+.instruction-container {
+  font-size: small;
+}
+
+.instruction-container h3 {
+  text-align: center;
+}
+
+.instruction {
+  width: 650px;
+  text-align: justify;
+}
+
 /* ---------- Draggable Line Items Begins --------- */
 ul .draggable::after {
   content: 'draggable';
