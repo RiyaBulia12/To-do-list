@@ -48,7 +48,8 @@ export const createTaskRow = (id, desc) => {
   const TASK_LIST = `<li class="task-list draggable" id="task-list-${id}"  draggable="true">
             <span><button class="checkbox" alt="checkbox" name="checkbox" id="checkbox-${id}"></button></span>
             <span class="task-name"><input type="text" class="add-task task-item" id="${id}" value="${desc}"></span>
-            <span><img src="${MenuIcon}" alt="Vertical Menu Icon" class="menu-dots"/></span>
+            <span><img src="${MenuIcon}" alt="Vertical Menu Icon" class="menu-dots" width="18"
+                        height="18"/></span>
          </li>`;
   clear.insertAdjacentHTML('beforebegin', TASK_LIST);
 
