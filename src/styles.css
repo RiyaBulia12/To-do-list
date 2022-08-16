@@ -97,6 +97,10 @@ img {
   text-align: justify;
 }
 
+.instruction ul {
+  list-style-type: none;
+}
+
 /* ---------- Draggable Line Items Begins --------- */
 ul .draggable::after {
   content: 'draggable';
@@ -163,3 +167,46 @@ ul .draggable::after {
 }
 
 /* --------------- Icons Ends ---------------- */
+
+/* --------------- Media Query Begins ---------------- */
+@media (max-width:928px) {
+  * {
+    font-size: small;
+  }
+
+  .parent {
+    flex-direction: column;
+    width: 100%;
+    justify-content: unset;
+    gap: 10%;
+    margin-top: 10%
+  }
+
+  h1 {
+    font-size: 15px;
+  }
+
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    font-size: small;
+  }
+
+  .parent-container {
+    width: 100%;
+  }
+
+  .instruction {
+    width: 90%;
+  }
+
+  .instruction ul li {
+    font-size: 9px;
+  }
+
+  .add-task {
+    width: 75%;
+  }
+}
+
+/* --------------- Media Query Ends ---------------- */
