@@ -169,7 +169,7 @@ ul .draggable::after {
 /* --------------- Icons Ends ---------------- */
 
 /* --------------- Media Query Begins ---------------- */
-@media (max-width:928px) {
+@media (max-width: 928px) {
   * {
     font-size: small;
   }
@@ -179,7 +179,7 @@ ul .draggable::after {
     width: 100%;
     justify-content: unset;
     gap: 10%;
-    margin-top: 10%
+    margin-top: 10%;
   }
 
   h1 {
