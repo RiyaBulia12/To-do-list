@@ -34,16 +34,14 @@ const removeTask = (event) => {
   removeTaskUI(id);
 };
 
-const changeTask = (taskInput) => {
-  taskInput.addEventListener('change', (event) => {
-    task.taskList = Tasks.fetch('task');
-    task.taskList.forEach((item) => {
-      if (item.index === +event.target.id) {
-        item.description = event.target.value;
-      }
-      task.updateIndex();
-      Tasks.updateStorage('task', task.taskList);
-    });
+export const changeTask = (event) => {
+  task.taskList = Tasks.fetch('task');
+  task.taskList.forEach((item) => {
+    if (item.index === +event.target.id) {
+      item.description = event.target.value;
+    }
+    task.updateIndex();
+    Tasks.updateStorage('task', task.taskList);
   });
 };
 
@@ -73,8 +71,9 @@ export const createTaskRow = (id, desc) => {
     elem.addEventListener('click', removeTask);
     elem.addEventListener('click', statusUpdate);
   });
+
   const taskInput = document.getElementById(`${id}`);
-  changeTask(taskInput);
+  taskInput.addEventListener('change', changeTask);
   activeTask(taskInput);
   dragEventListeners();
 };
@@ -91,11 +90,11 @@ export const addToStorage = (addTask) => {
 };
 
 export const addTaskHelperMethod = () => {
-  let addBtnVal = addTask.value;
+  const addBtnVal = addTask.value;
   if (addBtnVal !== '') {
     addToStorage(addTask);
     createTaskRow(id, addBtnVal);
-    addBtnVal = '';
+    addTask.value = '';
     addTask.focus();
   } else {
     inputValidation();
