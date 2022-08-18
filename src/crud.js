@@ -4,13 +4,29 @@ import statusUpdate from './statusUpdate.js';
 import dragEventListeners from './draggableEvents.js';
 
 const clear = document.querySelector('.clear');
+const addTask = document.getElementById('add-task');
 const task = new Tasks();
+let id = 0;
+task.taskList = Tasks.fetch('task');
 
 export const removeTaskUI = (id) => {
   const taskItem = document.getElementById(`${id}`);
   const checkbox = document.getElementById(`checkbox-${id}`);
   taskItem.classList.toggle('line-through');
   checkbox.classList.toggle('completed');
+};
+
+const inputValidation = () => {
+  addTask.placeholder = 'Empty Fields not allowed';
+  addTask.classList.add('empty-input');
+};
+
+export const clearTask = () => {
+  task.taskList = Tasks.fetch('task');
+  task.taskList = task.taskList.filter((item) => !item.completed);
+  task.updateIndex();
+  Tasks.updateStorage('task', task.taskList);
+  window.location.reload();
 };
 
 const removeTask = (event) => {
@@ -20,13 +36,13 @@ const removeTask = (event) => {
 
 const changeTask = (taskInput) => {
   taskInput.addEventListener('change', (event) => {
-    task.taskList = Tasks.fetch();
+    task.taskList = Tasks.fetch('task');
     task.taskList.forEach((item) => {
       if (item.index === +event.target.id) {
         item.description = event.target.value;
       }
       task.updateIndex();
-      Tasks.updateStorage(task.taskList);
+      Tasks.updateStorage('task', task.taskList);
     });
   });
 };
@@ -61,4 +77,23 @@ export const createTaskRow = (id, desc) => {
   changeTask(taskInput);
   activeTask(taskInput);
   dragEventListeners();
+};
+
+export const addTaskHelperMethod = (event) => {
+  let addBtnVal = addTask.value;
+  if (addBtnVal !== '') {
+    task.taskList = Tasks.fetch('task');
+    addTask.placeholder = 'Press/click enter to add task';
+    addTask.classList.remove('empty-input');
+    id = task.taskList.length > 0 ? task.taskList[task.taskList.length - 1].index : 0;
+    id += 1;
+    const taskItem = { index: id, description: `${addBtnVal}`, completed: false };
+    task.add(taskItem);
+    task.updateIndex();
+    createTaskRow(id, addBtnVal);
+    addBtnVal = '';
+    addTask.focus();
+  } else {
+    inputValidation();
+  }
 };
