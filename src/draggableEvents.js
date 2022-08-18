@@ -11,7 +11,7 @@ function swapItems(fromIndex, toIndex) {
   itemOne.value = itemTwo.value;
   itemTwo.value = temp;
 
-  task.taskList = Tasks.fetch();
+  task.taskList = Tasks.fetch('task');
 
   task.taskList.forEach((task) => {
     if (task.index === fromIndex) {
@@ -20,7 +20,7 @@ function swapItems(fromIndex, toIndex) {
       task.description = itemTwo.value;
     }
   });
-  Tasks.updateStorage(task.taskList);
+  Tasks.updateStorage('task', task.taskList);
 }
 
 function dragStart() {
