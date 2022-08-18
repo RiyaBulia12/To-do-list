@@ -18,3 +18,8 @@ test.md
 
 # Editors generated  files
 .vscode/*
+
+# Coverage  files
+coverage/*
+
+
