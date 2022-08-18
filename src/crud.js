@@ -79,7 +79,7 @@ export const createTaskRow = (id, desc) => {
   dragEventListeners();
 };
 
-const addToStorage = (addTask) => {
+export const addToStorage = (addTask) => {
   task.taskList = Tasks.fetch('task');
   addTask.placeholder = 'Press/click enter to add task';
   addTask.classList.remove('empty-input');
@@ -88,10 +88,10 @@ const addToStorage = (addTask) => {
   const taskItem = { index: id, description: `${addTask.value}`, completed: false };
   task.add(taskItem);
   task.updateIndex();
-}
+};
 
 export const addTaskHelperMethod = () => {
-  const addBtnVal = addTask.value;
+  let addBtnVal = addTask.value;
   if (addBtnVal !== '') {
     addToStorage(addTask);
     createTaskRow(id, addBtnVal);

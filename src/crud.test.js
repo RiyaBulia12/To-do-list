@@ -2,17 +2,18 @@
  * @jest-environment jsdom
  */
 
-import { addToStorage, clearTask, addTaskHelperMethod } from './crud.js';
-import TASK from './model/task.js';
-import statusUpdate from './statusUpdate.js';
+import { clearTask } from './crud.js';
 
-fdescribe('Add task to the list', () => {
-
-
-  const tasks = new TASK();
+describe('Add task to the list', () => {
   const { location } = window;
 
-  const dummyList = [{ index: 1, description: 'dummyTask1', completed: true }, { index: 1, description: 'dummyTask2', completed: false }, { index: 1, description: 'dummyTask3', completed: false }, { index: 1, description: 'dummyTask4', completed: false }, { index: 1, description: 'dummyTask5', completed: false }];
+  const dummyList = [
+    { index: 1, description: 'dummyTask1', completed: true },
+    { index: 1, description: 'dummyTask2', completed: false },
+    { index: 1, description: 'dummyTask3', completed: false },
+    { index: 1, description: 'dummyTask4', completed: false },
+    { index: 1, description: 'dummyTask5', completed: false },
+  ];
   localStorage.setItem('task', JSON.stringify(dummyList));
 
   beforeAll(() => {
@@ -34,28 +35,22 @@ fdescribe('Add task to the list', () => {
   });
 
   it('should NOT delete completed=false task from storage', () => {
-    let storageMock = JSON.parse(localStorage.getItem('task'));
+    const storageMock = JSON.parse(localStorage.getItem('task'));
     const expectedSize = storageMock.length;
     clearTask();
     const actualSize = JSON.parse(localStorage.getItem('task')).length;
     expect(actualSize).toEqual(expectedSize);
   });
 
-
-  fit('should delete completed=true task from storage', () => {
-    document.body.innerHTML = `<input type="text" id="add-task" value="test">`;
-    const addTask = document.getElementById('add-task');
-    const returnVal = addTaskHelperMethod(addTask);
-    // addTask = document.getElementById('add-task');
-    expect().lastReturnedWith()
-    // const mockCallBack = jest.fn();
-
-    // const button = shallow((<Button onClick={mockCallBack}>Ok!</Button>));
-    // button.find('button').simulate('click');
-    // addTask.value = 'dummyVal';
-
-
-
+  it('should delete ALL task from storage', () => {
+    dummyList[0].completed = true;
+    dummyList[1].completed = true;
+    dummyList[2].completed = true;
+    dummyList[3].completed = true;
+    dummyList[4].completed = true;
+    localStorage.setItem('task', JSON.stringify(dummyList));
+    clearTask();
+    const actualSize = JSON.parse(localStorage.getItem('task')).length;
+    expect(actualSize).toEqual(0);
   });
-
 });
