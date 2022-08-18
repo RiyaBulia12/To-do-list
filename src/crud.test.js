@@ -2,24 +2,24 @@
  * @jest-environment jsdom
  */
 
-import {clearTask, changeTask} from './crud.js';
+import { clearTask, changeTask } from './crud.js';
 
 const dummyList = [
-  {index: 1, description: 'dummyTask1', completed: true},
-  {index: 4, description: 'dummyTask2', completed: false},
-  {index: 5, description: 'dummyTask3', completed: false},
-  {index: 8, description: 'dummyTask4', completed: false},
-  {index: 9, description: 'dummyTask5', completed: false},
+  { index: 1, description: 'dummyTask1', completed: true },
+  { index: 4, description: 'dummyTask2', completed: false },
+  { index: 5, description: 'dummyTask3', completed: false },
+  { index: 8, description: 'dummyTask4', completed: false },
+  { index: 9, description: 'dummyTask5', completed: false },
 ];
 
 describe('Delete Task from storage', () => {
-  const {location} = window;
+  const { location } = window;
 
   localStorage.setItem('task', JSON.stringify(dummyList));
 
   beforeAll(() => {
     delete window.location;
-    window.location = {reload: jest.fn()};
+    window.location = { reload: jest.fn() };
   });
 
   afterAll(() => {
@@ -60,7 +60,7 @@ describe('Change the value for the task', () => {
   it('should change value in local storage', () => {
     localStorage.setItem('task', JSON.stringify(dummyList));
     const beforeChange = JSON.parse(localStorage.getItem('task'));
-    const event = {target: {id: 1, value: 'testDummy'}};
+    const event = { target: { id: 1, value: 'testDummy' } };
     changeTask(event);
     const afterChange = JSON.parse(localStorage.getItem('task'));
     expect(beforeChange[0]).not.toEqual(afterChange[0]);
@@ -69,7 +69,7 @@ describe('Change the value for the task', () => {
   it('should update index for the task list', () => {
     localStorage.setItem('task', JSON.stringify(dummyList));
     const beforeChange = JSON.parse(localStorage.getItem('task'));
-    const event = {target: {id: 1, value: 'testDummy'}};
+    const event = { target: { id: 1, value: 'testDummy' } };
     changeTask(event);
     const afterChange = JSON.parse(localStorage.getItem('task'));
     expect(beforeChange[0]).not.toEqual(afterChange[0]);
