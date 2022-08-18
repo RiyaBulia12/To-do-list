@@ -79,17 +79,21 @@ export const createTaskRow = (id, desc) => {
   dragEventListeners();
 };
 
+const addToStorage = (addTask) => {
+  task.taskList = Tasks.fetch('task');
+  addTask.placeholder = 'Press/click enter to add task';
+  addTask.classList.remove('empty-input');
+  id = task.taskList.length > 0 ? task.taskList[task.taskList.length - 1].index : 0;
+  id += 1;
+  const taskItem = { index: id, description: `${addTask.value}`, completed: false };
+  task.add(taskItem);
+  task.updateIndex();
+}
+
 export const addTaskHelperMethod = () => {
-  let addBtnVal = addTask.value;
+  const addBtnVal = addTask.value;
   if (addBtnVal !== '') {
-    task.taskList = Tasks.fetch('task');
-    addTask.placeholder = 'Press/click enter to add task';
-    addTask.classList.remove('empty-input');
-    id = task.taskList.length > 0 ? task.taskList[task.taskList.length - 1].index : 0;
-    id += 1;
-    const taskItem = { index: id, description: `${addBtnVal}`, completed: false };
-    task.add(taskItem);
-    task.updateIndex();
+    addToStorage(addTask);
     createTaskRow(id, addBtnVal);
     addBtnVal = '';
     addTask.focus();
