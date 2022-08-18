@@ -31,7 +31,7 @@ const titleSetStorage = (event) => {
 };
 
 addTask.addEventListener('keypress', (event) => {
-  if (event.key === 'Enter') addTaskHelperMethod()
+  if (event.key === 'Enter') addTaskHelperMethod();
 });
 returnIcon.addEventListener('click', addTaskHelperMethod);
 clear.addEventListener('click', clearTask);

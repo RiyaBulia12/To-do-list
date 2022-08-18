@@ -79,7 +79,7 @@ export const createTaskRow = (id, desc) => {
   dragEventListeners();
 };
 
-export const addTaskHelperMethod = (event) => {
+export const addTaskHelperMethod = () => {
   let addBtnVal = addTask.value;
   if (addBtnVal !== '') {
     task.taskList = Tasks.fetch('task');
