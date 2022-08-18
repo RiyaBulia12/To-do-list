@@ -27,6 +27,6 @@
     "ignorePatterns": [
         "dist/",
         "build/",
-        "coverage"
+        "coverage/"
     ]
 }

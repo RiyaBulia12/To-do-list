@@ -39,6 +39,7 @@
       "**/reset*.css",
       "**/bootstrap*.css",
       "**/*.js",
-      "**/*.jsx"
+      "**/*.jsx",
+      "coverage/**"
    ]
 }
