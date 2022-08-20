@@ -2,7 +2,7 @@ import './styles.css';
 import Tasks from './model/task.js';
 import {
   removeTaskUI, addTaskHelperMethod, createTaskRow, clearTask,
-} from './crud.js';
+} from './modules/crud.js';
 
 const clear = document.querySelector('.clear');
 const addTask = document.getElementById('add-task');

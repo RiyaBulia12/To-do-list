@@ -1,5 +1,5 @@
-import Tasks from './model/task.js';
-import MenuIcon from './icons/menu-vertical.png';
+import Tasks from '../model/task.js';
+import MenuIcon from '../icons/menu-vertical.png';
 import statusUpdate from './statusUpdate.js';
 import dragEventListeners from './draggableEvents.js';
 
