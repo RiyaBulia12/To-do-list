@@ -1,4 +1,4 @@
-import Tasks from './model/task.js';
+import Tasks from '../model/task.js';
 
 let dragStartIndex;
 const task = new Tasks();

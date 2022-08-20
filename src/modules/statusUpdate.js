@@ -1,4 +1,4 @@
-import Tasks from './model/task.js';
+import Tasks from '../model/task.js';
 
 const statusUpdate = (e) => {
   const id = +e.target.id.split('-')[1];
