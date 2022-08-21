@@ -10,8 +10,8 @@ body {
   display: flex;
   align-items: center;
   flex-direction: row;
-  height: 100vh;
   justify-content: space-around;
+  margin: 3rem 0;
 }
 
 h1 {
@@ -86,6 +86,7 @@ img {
 
 .instruction-container {
   font-size: small;
+  width: 45%;
 }
 
 .instruction-container h3 {
@@ -93,7 +94,7 @@ img {
 }
 
 .instruction {
-  width: 650px;
+  width: 90%;
   text-align: justify;
 }
 
@@ -126,7 +127,7 @@ ul .draggable::after {
 }
 
 .completed {
-  background-image: url("/src/icons/done.png");
+  background-image: url("../src/icons/done.png");
   background-repeat: no-repeat;
   border: none;
   background-size: 20px 20px;

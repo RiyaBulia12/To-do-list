@@ -1,4 +1,4 @@
-import Tasks from './model/task.js';
+import Tasks from '../model/task.js';
 
 let dragStartIndex;
 const task = new Tasks();
@@ -44,8 +44,7 @@ function dragLeave() {
 function dragDrop() {
   const dragEndIndex = +this.getAttribute('id').split('-')[2];
   swapItems(dragStartIndex, dragEndIndex);
-  this.classList.remove('over');
-  this.querySelector('.task-item').classList.remove('over');
+  dragLeave.call(this);
 }
 
 export default function dragEventListeners() {
