@@ -45,17 +45,17 @@ export const changeTaskDesc = (event) => {
 const updateElemIndex = () => {
   const taskLists = document.querySelectorAll('.task-list');
   taskLists.forEach((el, idx) => {
-    el.setAttribute('id', `task-list-${idx + 1}`)
-  })
+    el.setAttribute('id', `task-list-${idx + 1}`);
+  });
   const checkboxes = document.querySelectorAll('.checkbox');
   checkboxes.forEach((el, idx) => {
-    el.setAttribute('id', `checkbox-${idx + 1}`)
-  })
+    el.setAttribute('id', `checkbox-${idx + 1}`);
+  });
   const taskItems = document.querySelectorAll('.task-item');
   taskItems.forEach((el, idx) => {
-    el.setAttribute('id', `${idx + 1}`)
-  })
-}
+    el.setAttribute('id', `${idx + 1}`);
+  });
+};
 
 const activeTask = (taskInput) => {
   taskInput.addEventListener('click', (e) => {
@@ -120,7 +120,7 @@ export const clearTask = () => {
   tasks.forEach((task) => {
     task.parentElement.parentNode.remove();
   });
-  //re create the list
+  // re create the list
   task.taskList.forEach((task) => {
     createTaskRow(task.index, task.description);
   });
