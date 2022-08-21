@@ -1,7 +1,7 @@
 import './styles.css';
 import Tasks from './model/task.js';
 import {
-  removeTaskUI, addTaskHelperMethod, createTaskRow, clearTask,
+  strikeTask, addTaskHelperMethod, createTaskRow, clearTask,
 } from './modules/crud.js';
 
 const clear = document.querySelector('.clear');
@@ -17,7 +17,7 @@ if (task.taskList) {
     createTaskRow(task.index, task.description);
     // Add line-through for completed task when page is reload
     if (task.completed) {
-      removeTaskUI(task.index);
+      strikeTask(task.index);
     }
   });
 }

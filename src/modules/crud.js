@@ -10,7 +10,7 @@ const task = new Tasks();
 let id = 0;
 task.taskList = Tasks.fetch('task');
 
-export const removeTaskUI = (id) => {
+export const strikeTask = (id) => {
   const taskItem = document.getElementById(`${id}`);
   const checkbox = document.getElementById(`checkbox-${id}`);
   taskItem.classList.toggle('line-through');
@@ -24,14 +24,15 @@ const inputValidation = () => {
 
 const removeTask = (event) => {
   const id = event.target.id.split('-')[1];
-  removeTaskUI(id);
+  strikeTask(id);
 };
 
 export const changeTaskDesc = (event) => {
+  task.taskList = Tasks.fetch('task');
   task.taskList.forEach((item) => {
     if (item.index === +event.target.id) {
       if (item.completed) {
-        removeTaskUI(item.index);
+        strikeTask(item.index);
         item.completed = !item.completed;
       }
       item.description = event.target.value;
@@ -40,6 +41,21 @@ export const changeTaskDesc = (event) => {
   task.updateIndex();
   Tasks.updateStorage('task', task.taskList);
 };
+
+const updateElemIndex = () => {
+  const taskLists = document.querySelectorAll('.task-list');
+  taskLists.forEach((el, idx) => {
+    el.setAttribute('id', `task-list-${idx + 1}`)
+  })
+  const checkboxes = document.querySelectorAll('.checkbox');
+  checkboxes.forEach((el, idx) => {
+    el.setAttribute('id', `checkbox-${idx + 1}`)
+  })
+  const taskItems = document.querySelectorAll('.task-item');
+  taskItems.forEach((el, idx) => {
+    el.setAttribute('id', `${idx + 1}`)
+  })
+}
 
 const activeTask = (taskInput) => {
   taskInput.addEventListener('click', (e) => {
@@ -61,15 +77,15 @@ const activeTask = (taskInput) => {
       id += 1;
       if (+e.target.id === id) {
         icon.src = `${TrashIcon}`;
+        icon.addEventListener('click', () => {
+          task.taskList[id - 1].completed = !task.taskList[id - 1].completed;
+          task.taskList = task.taskList.filter((item) => !item.completed);
+          task.updateIndex();
+          Tasks.updateStorage('task', task.taskList);
+          listNode.remove();
+          updateElemIndex();
+        });
       }
-      icon.addEventListener('click', () => {
-        task.taskList[id - 1].completed = !task.taskList[id - 1].completed;
-        task.taskList = task.taskList.filter((item) => !item.completed);
-        task.updateIndex();
-        Tasks.updateStorage('task', task.taskList);
-
-        listNode.remove();
-      });
     });
   });
 };
@@ -99,11 +115,12 @@ export const clearTask = () => {
   task.updateIndex();
   Tasks.updateStorage('task', task.taskList);
 
-  // get all the items which has menu-dots class
+  // get all the items which has menu-dots class and remove it from ui
   const tasks = document.querySelectorAll('.menu-dots');
   tasks.forEach((task) => {
     task.parentElement.parentNode.remove();
   });
+  //re create the list
   task.taskList.forEach((task) => {
     createTaskRow(task.index, task.description);
   });
