@@ -13,11 +13,11 @@ const task = new Tasks();
 
 task.taskList = Tasks.fetch('task');
 if (task.taskList) {
-  task.taskList.forEach((task, id) => {
+  task.taskList.forEach((task) => {
     createTaskRow(task.index, task.description);
     // Add line-through for completed task when page is reload
     if (task.completed) {
-      removeTaskUI(id + 1);
+      removeTaskUI(task.index);
     }
   });
 }

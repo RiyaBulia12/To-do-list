@@ -1,5 +1,6 @@
 import Tasks from '../model/task.js';
 import MenuIcon from '../icons/menu-vertical.png';
+import TrashIcon from '../icons/trash.png';
 import statusUpdate from './statusUpdate.js';
 import dragEventListeners from './draggableEvents.js';
 
@@ -21,21 +22,12 @@ const inputValidation = () => {
   addTask.classList.add('empty-input');
 };
 
-export const clearTask = () => {
-  task.taskList = Tasks.fetch('task');
-  task.taskList = task.taskList.filter((item) => !item.completed);
-  task.updateIndex();
-  Tasks.updateStorage('task', task.taskList);
-  window.location.reload();
-};
-
 const removeTask = (event) => {
   const id = event.target.id.split('-')[1];
   removeTaskUI(id);
 };
 
-export const changeTask = (event) => {
-  task.taskList = Tasks.fetch('task');
+export const changeTaskDesc = (event) => {
   task.taskList.forEach((item) => {
     if (item.index === +event.target.id) {
       item.description = event.target.value;
@@ -46,7 +38,7 @@ export const changeTask = (event) => {
 };
 
 const activeTask = (taskInput) => {
-  taskInput.addEventListener('click', () => {
+  taskInput.addEventListener('click', (e) => {
     const current = document.getElementsByClassName('active');
     if (current.length > 0) {
       current[0].className = current[0].className.replace('active', '');
@@ -55,6 +47,26 @@ const activeTask = (taskInput) => {
     taskInput.classList.add('active');
     const listNode = taskInput.parentNode.parentNode;
     listNode.classList.add('active');
+
+    // display trash icon when item is clicked instead of menu icon
+    const menuIcons = document.querySelectorAll('.menu-dots');
+    menuIcons.forEach((icon, id) => {
+      if (icon.src === `${TrashIcon}`) {
+        icon.src = `${MenuIcon}`;
+      }
+      id += 1;
+      if (+e.target.id === id) {
+        icon.src = `${TrashIcon}`;
+      }
+      icon.addEventListener('click', () => {
+        task.taskList[id - 1].completed = !task.taskList[id - 1].completed;
+        task.taskList = task.taskList.filter((item) => !item.completed);
+        task.updateIndex();
+        Tasks.updateStorage('task', task.taskList);
+
+        listNode.remove();
+      });
+    });
   });
 };
 
@@ -62,8 +74,7 @@ export const createTaskRow = (id, desc) => {
   const TASK_LIST = `<li class="task-list draggable" id="task-list-${id}"  draggable="true">
             <span><button class="checkbox" alt="checkbox" name="checkbox" id="checkbox-${id}"></button></span>
             <span class="task-name"><input type="text" class="add-task task-item" id="${id}" value="${desc}"></span>
-            <span><img src="${MenuIcon}" alt="Vertical Menu Icon" class="menu-dots" width="18"
-                        height="18"/></span>
+            <span><img src="${MenuIcon}" alt="Vertical Menu Icon" class="menu-dots"/></span>
          </li>`;
   clear.insertAdjacentHTML('beforebegin', TASK_LIST);
 
@@ -73,13 +84,28 @@ export const createTaskRow = (id, desc) => {
   });
 
   const taskInput = document.getElementById(`${id}`);
-  taskInput.addEventListener('change', changeTask);
+  taskInput.addEventListener('change', changeTaskDesc);
   activeTask(taskInput);
   dragEventListeners();
 };
 
-export const addToStorage = (addTask) => {
+export const clearTask = () => {
   task.taskList = Tasks.fetch('task');
+  task.taskList = task.taskList.filter((item) => !item.completed);
+  task.updateIndex();
+  Tasks.updateStorage('task', task.taskList);
+
+  // get all the items which has menu-dots class
+  const tasks = document.querySelectorAll('.menu-dots');
+  tasks.forEach((task) => {
+    task.parentElement.parentNode.remove();
+  });
+  task.taskList.forEach((task) => {
+    createTaskRow(task.index, task.description);
+  });
+};
+
+export const addToStorage = (addTask) => {
   addTask.placeholder = 'Press/click enter to add task';
   addTask.classList.remove('empty-input');
   id = task.taskList.length > 0 ? task.taskList[task.taskList.length - 1].index : 0;

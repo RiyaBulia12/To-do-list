@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { clearTask, changeTask } from './crud.js';
+import { clearTask, changeTaskDesc } from './crud.js';
 
 const dummyList = [
   { index: 1, description: 'dummyTask1', completed: true },
@@ -15,9 +15,9 @@ const dummyList = [
 describe('Delete Task from storage', () => {
   const { location } = window;
 
-  localStorage.setItem('task', JSON.stringify(dummyList));
-
   beforeAll(() => {
+    localStorage.setItem('task', JSON.stringify(dummyList));
+
     delete window.location;
     window.location = { reload: jest.fn() };
   });
@@ -61,7 +61,7 @@ describe('Change the value for the task', () => {
     localStorage.setItem('task', JSON.stringify(dummyList));
     const beforeChange = JSON.parse(localStorage.getItem('task'));
     const event = { target: { id: 1, value: 'testDummy' } };
-    changeTask(event);
+    changeTaskDesc(event);
     const afterChange = JSON.parse(localStorage.getItem('task'));
     expect(beforeChange[0]).not.toEqual(afterChange[0]);
     expect(afterChange[0].description).toBe('testDummy');
@@ -70,7 +70,7 @@ describe('Change the value for the task', () => {
     localStorage.setItem('task', JSON.stringify(dummyList));
     const beforeChange = JSON.parse(localStorage.getItem('task'));
     const event = { target: { id: 1, value: 'testDummy' } };
-    changeTask(event);
+    changeTaskDesc(event);
     const afterChange = JSON.parse(localStorage.getItem('task'));
     expect(beforeChange[0]).not.toEqual(afterChange[0]);
   });
