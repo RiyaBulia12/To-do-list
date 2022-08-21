@@ -126,7 +126,7 @@ ul .draggable::after {
 }
 
 .completed {
-  background-image: url("/src/icons/done.png");
+  background-image: url("../src/icons/done.png");
   background-repeat: no-repeat;
   border: none;
   background-size: 20px 20px;
