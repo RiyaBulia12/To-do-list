@@ -30,11 +30,15 @@ const removeTask = (event) => {
 export const changeTaskDesc = (event) => {
   task.taskList.forEach((item) => {
     if (item.index === +event.target.id) {
+      if (item.completed) {
+        removeTaskUI(item.index);
+        item.completed = !item.completed;
+      }
       item.description = event.target.value;
     }
-    task.updateIndex();
-    Tasks.updateStorage('task', task.taskList);
   });
+  task.updateIndex();
+  Tasks.updateStorage('task', task.taskList);
 };
 
 const activeTask = (taskInput) => {
